@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Purposes</title>
+</head>
+
+<body>
+
+    <nav class="nav">
+        <div class="container">
+            <div class="nav__wrapp">
+
+                <div class="nav__logo">GoToPurposes</div>
+                <div class="nav__button"><button onclick="openPopup()" class="open__create">+</button></div>
+
+            </div>
+        </div>
+    </nav>
+
+    <section class="tasks">
+        <div class="container">
+            <div class="tasks__wrapp">
+
+                <div class="tasks__count">Список пуст</div>
+            
+            </div>
+        </div>
+    </section>
+
+    <div class="popup__bg">
+        <div class="container">
+            <div class="popup">
+                <div class="popup__inputs">
+                    <h2>Заголовок задачи</h2>
+                    <input class="input__header" type="text">
+                    <h2>Решение задачи</h2>
+                    <textarea class="input__text"></textarea>
+                </div>
+                <p class="input__error">Заполните все поля</p>
+                <div class="popup__buttons">
+                    <button onclick="closePopup()" class="inputs-close">Закрыть</button>
+                    <button onclick="removeValue()" class="inputs-reset">Очистить</button>
+                    <button onclick="creatTask()" class="inputs-safe">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+// Colors
+$purple: #ab47bc;
+$dark-purple: #790e8b;
+$light-purple: #df78ef;
+
+// Fonts
+$font: 'Montserrat', sans-serif;
+
+
+// Border
+%border {
+    border: solid 2px $purple;
+    border-radius: 12px;
+}
+// Interactive
+%border-interactive {
+    @extend %border;
+    background-color: white;
+    transition: 0.2s;
+
+    &:hover {
+        border-color: $dark-purple;
+        background-color: $dark-purple;
+        color: white;
+    }
+}

@@ -1,0 +1,58 @@
+.popup__bg {
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 30px;
+    background-color: white;
+}
+
+.popup {
+    display: none;
+    @extend %border;
+    padding: 10px 15px;
+    width: 600px;
+
+    &__inputs {
+        display: block;
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            padding: 10px 15px;
+        }
+    }
+}
+
+.popup__bg.active {
+    display: flex;
+}
+
+.popup.active {
+    display: block;
+}
+
+.input__text {
+    height: 300px;
+    resize: vertical;
+}
+
+.inputs-reset, .inputs-safe, .inputs-close {
+    width: 33.3333%;
+    margin: 0 5px;
+}
+
+.input__error {
+    display: none;
+    margin-bottom: 15px;
+    color: red;
+
+    &.active {
+        display: block;
+    }
+}
+

@@ -1,0 +1,18 @@
+.nav {
+    font-weight: 700;
+    &__logo { 
+        color: $purple;
+    }
+
+    &__wrapp {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+    }
+}
+
+.open__create {
+    font-weight: 600;
+    padding: 10px 15px;
+}
