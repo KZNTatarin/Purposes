@@ -117,9 +117,9 @@ const deleteAskTask = (id) => {
     container.appendChild(deleteAskWrapp);
     deleteAsk.appendChild(container);
     body.appendChild(deleteAsk);
-
-
 }
+
+
 
 const removeAsk = () => {
     body.removeChild(document.querySelector('.delete__ask'));
@@ -175,5 +175,5 @@ const changeValue = (id) => {
 }
 
 
-
+//  Комм
 
