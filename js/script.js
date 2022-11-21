@@ -24,6 +24,7 @@ const removeValue = () => {
   }
 };
 
+// подгрузка Tasks
 const loadTasks = () => {
   const tasksLocal = JSON.parse(localStorage.getItem("tasks"));
 
@@ -72,58 +73,27 @@ const loadTasks = () => {
 
     task.appendChild(taskContent);
     task.appendChild(taskSettings);
-    taskWrapp.appendChild(task);
+
+    const checkIfElementExist = document.getElementById(`${element.id}`);
+
+    if (!checkIfElementExist) {
+      taskWrapp.appendChild(task);
+    }
   });
 };
 
 window.addEventListener("DOMContentLoaded", () => {
   loadTasks();
-  console.log(JSON.parse(localStorage.getItem("tasks")))
 });
 
+// создает Task
 const creatTask = () => {
   const error = document.querySelector(".input__error");
 
   if (inputHeader.value === "" || inputText.value === "") {
     error.classList.add("active");
   } else {
-    // let task = document.createElement("div");
-    // task.className = "task";
     const id = Math.floor(Math.random() * 10000000);
-    // task.setAttribute("id", String(id));
-
-    // let h3 = document.createElement("h3");
-    // h3.innerHTML = inputHeader.value;
-
-    // let taskDescription = document.createElement("div");
-    // taskDescription.className = "task__description";
-    // taskDescription.innerHTML = inputText.value;
-
-    // let taskContent = document.createElement("div");
-    // taskContent.className = "task__content";
-    // taskContent.appendChild(h3);
-    // taskContent.appendChild(taskDescription);
-
-    // let taskDeleteBtn = document.createElement("button");
-    // taskDeleteBtn.className = "task__delete";
-    // taskDeleteBtn.innerHTML = "X";
-    // taskDeleteBtn.setAttribute("onClick", `deleteAskTask(${id})`);
-
-    // let taskChanseBtn = document.createElement("button");
-    // taskChanseBtn.className = "task__chanse";
-    // let chanseImg = document.createElement("img");
-    // chanseImg.setAttribute("src", "./img/icon-black.svg");
-    // taskChanseBtn.appendChild(chanseImg);
-    // taskChanseBtn.setAttribute("onClick", `changeTask(${id})`);
-
-    // let taskSettings = document.createElement("div");
-    // taskSettings.className = "task__settings";
-    // taskSettings.appendChild(taskDeleteBtn);
-    // taskSettings.appendChild(taskChanseBtn);
-
-    // task.appendChild(taskContent);
-    // task.appendChild(taskSettings);
-    // taskWrapp.appendChild(task);
 
     const objectTask = {
       title: inputHeader.value,
@@ -131,19 +101,27 @@ const creatTask = () => {
       id: id,
     };
 
-    const array = JSON.parse(localStorage.getItem("tasks"));
-    array.push(objectTask);
-    localStorage.setItem("tasks", JSON.stringify(array));
+    let tasks = JSON.parse(localStorage.getItem("tasks"));
 
-    console.log(JSON.parse(localStorage.getItem("tasks")));
+    if (tasks === null) {
+      tasks = [];
+    }
+
+    tasks.push(objectTask);
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+
+    loadTasks();
 
     closePopup();
+
     error.classList.remove("active");
     inputHeader.value = "";
     inputText.value = "";
   }
 };
 
+// удаление Task
 const deleteAskTask = (id) => {
   let deleteAsk = document.createElement("div");
   deleteAsk.classList.add("delete__ask");
@@ -191,9 +169,15 @@ const deleteTask = (id) => {
   );
   localStorage.setItem("tasks", JSON.stringify(newTasks));
 
-  console.log(JSON.parse(localStorage.getItem("tasks")))
+  if (JSON.parse(localStorage.getItem("tasks")).length !== 0) {
+    loadTasks();
+  } else if (JSON.parse(localStorage.getItem("tasks")).length === 0) {
+    const tasksCount = document.querySelector(".tasks__count");
+    tasksCount.style.display = "block";
+  }
 };
 
+// изменяет Task
 const changeTask = (id) => {
   const h3 = document.getElementsByTagName("h3")[0];
   const taskDescription = document.querySelector(".task__description");
