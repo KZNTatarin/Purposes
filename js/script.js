@@ -179,17 +179,19 @@ const deleteTask = (id) => {
 
 // изменяет Task
 const changeTask = (id) => {
-  const h3 = document.getElementsByTagName("h3")[0];
-  const taskDescription = document.querySelector(".task__description");
-  const button = document.querySelector(".task__chanse");
+  const element = document.getElementById(`${id}`);
+
+  const taskTitle = element.getElementsByTagName("h3")[0];
+  const taskDescription = element.querySelector(".task__description");
+  const button = element.querySelector(".task__chanse");
 
   const h3Input = document.createElement("input");
-  h3Input.value = h3.textContent;
+  h3Input.value = taskTitle.textContent;
 
   const descriptionTextarea = document.createElement("textarea");
   descriptionTextarea.value = taskDescription.textContent;
 
-  h3.parentNode.replaceChild(h3Input, h3);
+  taskTitle.parentNode.replaceChild(h3Input, taskTitle);
   taskDescription.parentNode.replaceChild(descriptionTextarea, taskDescription);
 
   button.setAttribute("onClick", `changeValue(${id})`);
@@ -210,5 +212,28 @@ const changeValue = (id) => {
 
   h3Input.parentNode.replaceChild(h3, h3Input);
   descriptionTextarea.parentNode.replaceChild(description, descriptionTextarea);
+
   button.setAttribute("onClick", `changeTask(${id})`);
+
+  const objectTask = {
+    title: h3Input.value,
+    description: descriptionTextarea.value,
+    id: id,
+  };
+
+  let tasks = JSON.parse(localStorage.getItem("tasks"));
+
+  if (tasks === null) {
+    tasks = [];
+  }
+
+  const elementInArray = tasks.findIndex((element) => element.id === id);
+
+  tasks[elementInArray].id = objectTask.id;
+  tasks[elementInArray].title = objectTask.title;
+  tasks[elementInArray].description = objectTask.description;
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+
+  loadTasks();
 };
